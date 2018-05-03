@@ -16,7 +16,6 @@
 		5C1D5BA1209446170025172A /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA0209446170025172A /* UILabelX.swift */; };
 		5C1D5BA3209446510025172A /* CoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA2209446510025172A /* CoverImageView.swift */; };
 		5C1D5BA5209446710025172A /* MusicPlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */; };
-		5C1D5BA72094472A0025172A /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA62094472A0025172A /* SetupViewController.swift */; };
 		5C26BFE62095578B0090ADAE /* IHWaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */; };
 		5C77F0712094502400DD39A7 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F0702094502300DD39A7 /* Music.swift */; };
 		5C77F073209481BC00DD39A7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F072209481BC00DD39A7 /* StartViewController.swift */; };
@@ -62,7 +61,6 @@
 		5C1D5BA0209446170025172A /* UILabelX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
 		5C1D5BA2209446510025172A /* CoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageView.swift; sourceTree = "<group>"; };
 		5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlaylistTableViewCell.swift; sourceTree = "<group>"; };
-		5C1D5BA62094472A0025172A /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHWaveFormView.swift; sourceTree = "<group>"; };
 		5C77F0702094502300DD39A7 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		5C77F072209481BC00DD39A7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 			children = (
 				5C77F072209481BC00DD39A7 /* StartViewController.swift */,
 				5C1D5B9A2094458E0025172A /* VoteViewController.swift */,
-				5C1D5BA62094472A0025172A /* SetupViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,10 +122,6 @@
 				5C77F0702094502300DD39A7 /* Music.swift */,
 				5C1D5B9E209445DA0025172A /* Functions.swift */,
 				5C77F07720948CF600DD39A7 /* Constants.swift */,
-				5C1D5BA2209446510025172A /* CoverImageView.swift */,
-				5C77F0742094850E00DD39A7 /* CustomTableView.swift */,
-				5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */,
-				5C1D5BA0209446170025172A /* UILabelX.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +130,10 @@
 			isa = PBXGroup;
 			children = (
 				5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */,
+				5C1D5BA2209446510025172A /* CoverImageView.swift */,
+				5C77F0742094850E00DD39A7 /* CustomTableView.swift */,
+				5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */,
+				5C1D5BA0209446170025172A /* UILabelX.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -338,7 +335,6 @@
 				5C77F073209481BC00DD39A7 /* StartViewController.swift in Sources */,
 				5C77F0712094502400DD39A7 /* Music.swift in Sources */,
 				5C26BFE62095578B0090ADAE /* IHWaveFormView.swift in Sources */,
-				5C1D5BA72094472A0025172A /* SetupViewController.swift in Sources */,
 				5C77F0752094850F00DD39A7 /* CustomTableView.swift in Sources */,
 				5C1D5BA3209446510025172A /* CoverImageView.swift in Sources */,
 				5C1D5B9D209445B70025172A /* DataService.swift in Sources */,

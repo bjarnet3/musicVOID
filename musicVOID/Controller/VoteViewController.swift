@@ -13,7 +13,6 @@ import MBCircularProgressBar
 class VoteViewController: UIViewController {
     
     // MARK: - Outlet Properties
-    
     @IBOutlet weak var nowPlayingImageView: UIImageView!
     @IBOutlet weak var nowPlayingArtistLabel: UILabel!
     @IBOutlet weak var nowPlayingTitleLabel: UILabel!

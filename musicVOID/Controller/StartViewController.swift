@@ -38,8 +38,6 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     // https://github.com/benoit-pereira-da-silva/SoundWaveForm
     // ---------------------------------------------------------
     
-    
-    
     // MARK: - Class and Varible Properties
     var timer = Timer()
     var timeFull : Int = 0
@@ -460,12 +458,18 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath) as? MusicPlaylistTableViewCell {
             // TODO: - Songs Without artwork will not be added "add default image"
+            
+            let item = musicPlaylist[indexPath.row]
+            cell.loadData(from: item)
+            
+            /*
             let image = musicPlaylist[indexPath.row].artwork?.image(at: CGSize(width: 120, height: 120))
             if let title = musicPlaylist[indexPath.row].title {
                 if let artist = musicPlaylist[indexPath.row].artist {
                     cell.configureCell(image: image, artist: artist, title: title)
                 }
             }
+            */
             return cell
         } else {
             return MusicPlaylistTableViewCell()
