@@ -14,10 +14,6 @@ import SoundWaveForm
 import Foundation
 import AVFoundation
 
-class TestViewController: UniverslViewController {
-    
-}
-
 class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     // MARK: - Outlet Properties
@@ -447,7 +443,6 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         nowPlaying()
         updateMusicTimer()
     }
-    
     
 }
 
