@@ -455,21 +455,14 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 62.0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath) as? MusicPlaylistTableViewCell {
-            // TODO: - Songs Without artwork will not be added "add default image"
-            
             let item = musicPlaylist[indexPath.row]
             cell.loadData(from: item)
-            
-            /*
-            let image = musicPlaylist[indexPath.row].artwork?.image(at: CGSize(width: 120, height: 120))
-            if let title = musicPlaylist[indexPath.row].title {
-                if let artist = musicPlaylist[indexPath.row].artist {
-                    cell.configureCell(image: image, artist: artist, title: title)
-                }
-            }
-            */
             return cell
         } else {
             return MusicPlaylistTableViewCell()
