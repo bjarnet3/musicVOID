@@ -17,10 +17,14 @@
 		5C1D5BA3209446510025172A /* CoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA2209446510025172A /* CoverImageView.swift */; };
 		5C1D5BA5209446710025172A /* MusicPlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */; };
 		5C26BFE62095578B0090ADAE /* IHWaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */; };
+		5C486E3B2121C0D100F63214 /* CALayer+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C486E3A2121C0D100F63214 /* CALayer+addShadow.swift */; };
+		5C486E3F2121E30000F63214 /* RoundCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C486E3E2121E30000F63214 /* RoundCornerView.swift */; };
 		5C77F0712094502400DD39A7 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F0702094502300DD39A7 /* Music.swift */; };
 		5C77F073209481BC00DD39A7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F072209481BC00DD39A7 /* StartViewController.swift */; };
 		5C77F0752094850F00DD39A7 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F0742094850E00DD39A7 /* CustomTableView.swift */; };
 		5C77F07820948CF700DD39A7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77F07720948CF600DD39A7 /* Constants.swift */; };
+		5C98BB462122009B0004EB84 /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C98BB442122009A0004EB84 /* FrostyView.swift */; };
+		5C98BB472122009B0004EB84 /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C98BB452122009B0004EB84 /* FrostyTabBar.swift */; };
 		5CB38D652094434C00867CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CB38D642094434C00867CF3 /* GoogleService-Info.plist */; };
 		5CFC35A5209441C100B34A0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC35A4209441C100B34A0D /* AppDelegate.swift */; };
 		5CFC35AA209441C100B34A0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFC35A8209441C100B34A0D /* Main.storyboard */; };
@@ -62,10 +66,14 @@
 		5C1D5BA2209446510025172A /* CoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageView.swift; sourceTree = "<group>"; };
 		5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHWaveFormView.swift; sourceTree = "<group>"; };
+		5C486E3A2121C0D100F63214 /* CALayer+addShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+addShadow.swift"; sourceTree = "<group>"; };
+		5C486E3E2121E30000F63214 /* RoundCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundCornerView.swift; path = musicVOID/View/RoundCornerView.swift; sourceTree = SOURCE_ROOT; };
 		5C77F0702094502300DD39A7 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		5C77F072209481BC00DD39A7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		5C77F0742094850E00DD39A7 /* CustomTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		5C77F07720948CF600DD39A7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5C98BB442122009A0004EB84 /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
+		5C98BB452122009B0004EB84 /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
 		5CB38D642094434C00867CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5CFC35A1209441C100B34A0D /* musicVOID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicVOID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFC35A4209441C100B34A0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,8 +118,8 @@
 		5C1D5B91209445110025172A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5C77F072209481BC00DD39A7 /* StartViewController.swift */,
 				5C1D5B9A2094458E0025172A /* VoteViewController.swift */,
+				5C77F072209481BC00DD39A7 /* StartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -120,8 +128,11 @@
 			isa = PBXGroup;
 			children = (
 				5C77F0702094502300DD39A7 /* Music.swift */,
-				5C1D5B9E209445DA0025172A /* Functions.swift */,
 				5C77F07720948CF600DD39A7 /* Constants.swift */,
+				5C1D5B9E209445DA0025172A /* Functions.swift */,
+				5C98BB442122009A0004EB84 /* FrostyView.swift */,
+				5C98BB452122009B0004EB84 /* FrostyTabBar.swift */,
+				5C486E3A2121C0D100F63214 /* CALayer+addShadow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */,
+				5C486E3E2121E30000F63214 /* RoundCornerView.swift */,
 				5C1D5BA2209446510025172A /* CoverImageView.swift */,
 				5C77F0742094850E00DD39A7 /* CustomTableView.swift */,
 				5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */,
@@ -327,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C98BB472122009B0004EB84 /* FrostyTabBar.swift in Sources */,
 				5C1D5B9B2094458E0025172A /* VoteViewController.swift in Sources */,
 				5C1D5BA5209446710025172A /* MusicPlaylistTableViewCell.swift in Sources */,
 				5CFC35A5209441C100B34A0D /* AppDelegate.swift in Sources */,
@@ -335,9 +348,12 @@
 				5C77F073209481BC00DD39A7 /* StartViewController.swift in Sources */,
 				5C77F0712094502400DD39A7 /* Music.swift in Sources */,
 				5C26BFE62095578B0090ADAE /* IHWaveFormView.swift in Sources */,
+				5C98BB462122009B0004EB84 /* FrostyView.swift in Sources */,
 				5C77F0752094850F00DD39A7 /* CustomTableView.swift in Sources */,
+				5C486E3B2121C0D100F63214 /* CALayer+addShadow.swift in Sources */,
 				5C1D5BA3209446510025172A /* CoverImageView.swift in Sources */,
 				5C1D5B9D209445B70025172A /* DataService.swift in Sources */,
+				5C486E3F2121E30000F63214 /* RoundCornerView.swift in Sources */,
 				5C77F07820948CF700DD39A7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

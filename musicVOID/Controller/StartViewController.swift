@@ -17,13 +17,20 @@ import AVFoundation
 class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     // MARK: - Outlet Properties
-    @IBOutlet weak var coverImageView: CoverImageView!
-    @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var coverImageView: RoundCornerView!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var voteMode: UISwitch!
+    
+    @IBOutlet weak var artistLabel: UILabelX!
+    @IBOutlet weak var titleLabel: UILabelX!
+    @IBOutlet weak var logoImageView: UIImageView!
+    
+    @IBOutlet weak var minimize: UIButton!
     @IBOutlet weak var musicProgress: UIProgressView!
+    @IBOutlet weak var progressView: UIProgressView!
+    
+    @IBOutlet weak var tableBackView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Media Player and Playlist Properties
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
@@ -59,13 +66,39 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set tableView
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0)
         
-        tableView.contentInset = UIEdgeInsetsMake(120.0, 0, 100, 0)
+        scrollView.delegate = self
+        scrollView.delegate = self
+        
+        // Set tableBackView
+        tableBackView.clipsToBounds = true
+        tableBackView.layer.cornerRadius = 28
+        tableBackView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
         // removeDatabaseValues(at: .voting)
         syncDatabasePlaylists()
         changedNowPlaying()
+        
+        addParallaxEffectOnView(self.coverImageView, 22)
+        addParallaxEffectOnView(self.artistLabel, 8)
+        addParallaxEffectOnView(self.titleLabel, 8)
+        addParallaxEffectOnView(self.logoImageView, 10)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tab = self.tabBarController?.tabBar as! FrostyTabBar
+        tab.setEffect(blurEffect: .light)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setProgress(progress: 0.0, animated: true, alpha: 0.0)
     }
     
     // MARK: - Player functions
@@ -337,7 +370,14 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
     }
     
+    func updateTitle() {
+        self.artistLabel.rotation = timeCurrent
+        self.titleLabel.rotation = -timeCurrent
+    }
+    
     @objc func updateCommandsInTime() {
+        print("updateCommand")
+        updateTitle()
         progressCurrent += progressStep
         musicProgress.setProgress(progressCurrent, animated: true)
         timeCurrent = Int(musicPlayer.currentPlaybackTime)
@@ -442,6 +482,116 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         updateMusicTimer()
     }
     
+    var remoteMiniMized = true
+    var remoteMidiMized = false
+    
+    func maxiMizeRemote() {
+        self.tableBackView.frame = CGRect(x: 0, y: 68, width: 375, height: 601)
+    }
+    
+    @IBAction func showRemoteAction(_ sender: UIButton) {
+        setProgress(progress: 0.4, animated: true, alpha: 0.8)
+        // self.tableBackView.transform
+        if self.remoteMiniMized {
+            hapticButton(.medium)
+            // SHOW REMOTE
+            // -----------
+            UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+                self.tableBackView.frame = CGRect(x: 0, y: 339, width: 375, height: 330)
+                self.tableBackView.layer.cornerRadius = 28
+            })
+            setProgress(progress: 0.9, animated: true, alpha: 1.0)
+            self.remoteMiniMized = false
+            self.remoteMidiMized = true
+            UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+                
+            })
+            setProgress(progress: 1.0, animated: true, alpha: 0.0)
+        } else if self.remoteMidiMized {
+            hapticButton(.medium)
+            // SHOW REMOTE
+            // -----------
+            UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+                self.tableBackView.frame = CGRect(x: 0, y: 564, width: 375, height: 105)
+                self.tableBackView.layer.cornerRadius = 28
+            })
+            
+            setProgress(progress: 0.5, animated: true, alpha: 1.0)
+            self.remoteMiniMized = true
+            self.remoteMidiMized = false
+            UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+                
+            })
+            setProgress(progress: 0.0, animated: true, alpha: 0.0)
+        }
+    }
+    
+    private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
+        if let progressView = self.progressView {
+            if animated {
+                progressView.setProgress(progress, animated: animated)
+                UIView.animate(withDuration: 0.90, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    progressView.alpha = alpha
+                })
+            } else {
+                progressView.setProgress(progress, animated: animated)
+                progressView.alpha = alpha
+            }
+        }
+    }
+    
+}
+
+extension StartViewController : UIScrollViewDelegate {
+    // Search for: scrollViewDidScroll UIVisualEffect
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.scrollView {
+            let contentOffset = scrollView.contentOffset.y < 0 ? -scrollView.contentOffset.y : scrollView.contentOffset.y
+            
+            let scaleMAX = (contentOffset * 0.001075) + (0.995 - 0.001075)
+            let scaleMIN:CGFloat = 0.965
+            
+            if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
+                self.coverImageView.transform = CGAffineTransform(scaleX: scaleMAX, y: scaleMAX)
+            } else if scrollView.contentOffset.y == 0 {
+                UIView.animate(withDuration: 0.60, delay: 0.001, usingSpringWithDamping: 0.20, initialSpringVelocity: 0.15, options: .curveEaseIn, animations: {
+                    self.coverImageView.transform = CGAffineTransform(scaleX: scaleMIN, y: scaleMIN)
+                })
+            }
+ 
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.contentOffset.y <= -80 {
+            print("scrollViewWillEndDragging: \(velocity) with -80 in offset ")
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
+        print("decelerate: \(decelerate)")
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDecelerating")
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // self.scrollContentOffset = 0.0
+        if scrollView.contentOffset.y <= -80 {
+            print("scrollViewDidEndDecelerating and -80 y. offset")
+        }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        print("scrollViewDidEndScrollingAnimation")
+    }
+    
 }
 
 extension StartViewController: UITableViewDataSource, UITableViewDelegate {
@@ -481,12 +631,14 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.setProgress(progress: 0.3, animated: true, alpha: 1.0)
         // musicPlayer.setQueue(with: MPMediaItemCollection(items: musicPlaylist))
         let collection = MPMediaItemCollection(items: musicPlaylist)
         musicPlayer.nowPlayingItem = collection.items[indexPath.row]
         playAction()
         changedNowPlaying()
         tableView.deselectRow(at: indexPath, animated: true)
+        self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

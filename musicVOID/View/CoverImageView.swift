@@ -10,18 +10,15 @@ import UIKit
 
 class CoverImageView: UIImageView {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = hexStringToUIColor("000000", 1.0).cgColor // UIColor.gray.cgColor
+        testShaddow()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        self.clipsToBounds = true
-        self.layer.cornerRadius = self.frame.height / 2 // self.frame.height / 2
+    func testShaddow() {
+        layer.roundCorners(radius: self.frame.height/2)
+        layer.addShadow(offset: CGSize(width: 3, height: 3), opacity: 0.5, radius: 3, color: .black)
     }
     
 }

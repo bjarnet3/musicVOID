@@ -8,7 +8,7 @@
 
 import UIKit
 
-// @IBDesignable
+@IBDesignable
 class UILabelX: UILabel {
     // *******************************************************
     // DEFINITIONS (Because I'm not brilliant and I'll forget most this tomorrow.)
@@ -29,44 +29,50 @@ class UILabelX: UILabel {
     // cosine: Also takes an angle in degrees and gives you another number from using the two radiuses (radii).
     // *******************************************************
     
+    // https://stackoverflow.com/questions/32771864/draw-text-along-circular-path-in-swift-for-ios/32785652
+    
     @IBInspectable var angle: CGFloat = 1.6
     @IBInspectable var clockwise: Bool = true
+    
+    @IBInspectable var rotation: Int {
+        get { return 0 }
+        set {
+            let radians = CGFloat(CGFloat(Double.pi) * CGFloat(newValue) / CGFloat(180.0))
+            self.transform = CGAffineTransform(rotationAngle: radians)
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         centreArcPerpendicular()
     }
-    
     /**
      This draws the self.text around an arc of radius r,
      with the text centred at polar angle theta
      */
     func centreArcPerpendicular() {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        let str = self.text ?? ""
-        let size = self.bounds.size
+        let string = text ?? ""
+        let size   = bounds.size
         context.translateBy(x: size.width / 2, y: size.height / 2)
         
         let radius = getRadiusForLabel()
-        let l = str.count
+        let l = string.count
+        let attributes = [NSAttributedStringKey.font : self.font!]
         
-        let fontStyle = UIFont(name: "Enhanced Dot Digital-7", size: 25)
-        // let attributes: [String : Any] = [NSAttributedStringKey.font.rawValue: self.font]
-        let attributes = [NSAttributedStringKey.font: fontStyle]
-        
-        let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
+        let characters: [String] = string.map { String($0) } // An array of single character strings, each character in str
         var arcs: [CGFloat] = [] // This will be the arcs subtended by each character
         var totalArc: CGFloat = 0 // ... and the total arc subtended by the string
         
         // Calculate the arc subtended by each letter and their total
         for i in 0 ..< l {
-            arcs += [chordToArc(characters[i].size(withAttributes: attributes as Any as? [NSAttributedStringKey : Any]).width, radius: radius)]
+            arcs += [chordToArc(characters[i].size(withAttributes: attributes).width, radius: radius)]
             totalArc += arcs[i]
         }
         
         // Are we writing clockwise (right way up at 12 o'clock, upside down at 6 o'clock)
         // or anti-clockwise (right way up at 6 o'clock)?
         let direction: CGFloat = clockwise ? -1 : 1
-        let slantCorrection = clockwise ? -CGFloat(Double.pi / 2) : CGFloat(Double.pi / 2)
+        let slantCorrection = clockwise ? -CGFloat.pi/2 : CGFloat.pi/2
         
         // The centre of the first character will then be at
         // thetaI = theta - totalArc / 2 + arcs[0] / 2
@@ -101,8 +107,10 @@ class UILabelX: UILabel {
      */
     func centre(text str: String, context: CGContext, radius r:CGFloat, angle theta: CGFloat, slantAngle: CGFloat) {
         // Set the text attributes
-        let attributes = [NSAttributedStringKey.foregroundColor.rawValue: self.textColor,
-                          NSAttributedStringKey.font: self.font] as [AnyHashable : Any]
+        let attributes : [NSAttributedStringKey : Any] = [
+            NSAttributedStringKey.foregroundColor: textColor!,
+            NSAttributedStringKey.font: font!
+        ]
         // Save the context
         context.saveGState()
         // Move the origin to the centre of the text (negating the y-axis manually)
@@ -110,11 +118,11 @@ class UILabelX: UILabel {
         // Rotate the coordinate system
         context.rotate(by: -slantAngle)
         // Calculate the width of the text
-        let offset = str.size(withAttributes: attributes as? [NSAttributedStringKey : Any])
+        let offset = str.size(withAttributes: attributes)
         // Move the origin by half the size of the text
         context.translateBy(x: -offset.width / 2, y: -offset.height / 2) // Move the origin to the centre of the text (negating the y-axis manually)
         // Draw the text
-        str.draw(at: CGPoint(x: 0, y: 0), withAttributes: attributes as? [NSAttributedStringKey : Any])
+        str.draw(at: CGPoint(x: 0, y: 0), withAttributes: attributes)
         // Restore the context
         context.restoreGState()
     }
@@ -124,11 +132,10 @@ class UILabelX: UILabel {
         // The circle will be as big as the smallest width or height of this label.
         // But we need to fit the size of the font on the circle so make the circle a little
         // smaller so the text does not get drawn outside the bounds of the circle.
-        let smallestWidthOrHeight = min(self.bounds.size.height, self.bounds.size.width)
-        let heightOfFont = self.text?.size(withAttributes: [NSAttributedStringKey.font: self.font]).height ?? 0
+        let smallestWidthOrHeight = min(bounds.size.height, bounds.size.width)
+        let heightOfFont = text?.size(withAttributes: [NSAttributedStringKey.font: self.font]).height ?? 0
         
         // Dividing the smallestWidthOrHeight by 2 gives us the radius for the circle.
         return (smallestWidthOrHeight/2) - heightOfFont + 5
     }
 }
-

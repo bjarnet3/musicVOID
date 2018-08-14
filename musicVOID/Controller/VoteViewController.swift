@@ -103,6 +103,14 @@ class VoteViewController: UIViewController {
         hideVoteSuperView(hide: true, animate: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let tab = self.tabBarController?.tabBar as? FrostyTabBar {
+            tab.setEffect(blurEffect: .light)
+        }
+    }
+    
     // MARK: - Vote View Functions
     func vote(voteValue: CGFloat, voteSuper: UIView, voteView: MBCircularProgressBarView, voteImageView: UIImageView, animate: Bool = false) {
         removeParallaxEffectOnView(voteSuper)
