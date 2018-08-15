@@ -20,23 +20,59 @@
             <objects>
                 <tabBarController id="vgb-Qe-qEX" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZVH-eh-1TM" customClass="FrostyTabBar" customModule="musicVOID" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZVH-eh-1TM" customClass="FrostyTabBar" customModule="musicVOID" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="uFf-D1-UdL" kind="relationship" relationship="viewControllers" id="5W7-07-rTu"/>
                         <segue destination="cPx-gU-I9k" kind="relationship" relationship="viewControllers" id="Wfo-cu-jiA"/>
+                        <segue destination="uFf-D1-UdL" kind="relationship" relationship="viewControllers" id="5W7-07-rTu"/>
+                        <segue destination="9Tx-RC-bWh" kind="relationship" relationship="viewControllers" id="pyl-BU-Dad"/>
+                        <segue destination="gN2-5F-PhG" kind="relationship" relationship="viewControllers" id="VNs-Bb-kAr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6au-Fl-MMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-618" y="636"/>
         </scene>
-        <!--Vote View Controller-->
+        <!--Messages-->
+        <scene sceneID="eI7-JG-Qqr">
+            <objects>
+                <viewController id="9Tx-RC-bWh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qz6-qx-QNh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iQy-tG-qsT"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Messages" image="tabbar_request" badgeValue="3" selectedImage="tabbar_request" id="7nm-rV-BNs">
+                        <color key="badgeColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yY8-cZ-y0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-303" y="1458"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="0tn-a6-FPE">
+            <objects>
+                <viewController id="gN2-5F-PhG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J8B-yg-r0c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="YAf-uV-rAN"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="tabbar_profile_start" selectedImage="tabbar_profile_start" id="pau-AS-0Ay"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIM-GZ-UqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="332" y="1458"/>
+        </scene>
+        <!--Quiz-->
         <scene sceneID="L8N-wc-gRL">
             <objects>
                 <viewController id="uFf-D1-UdL" customClass="VoteViewController" customModule="musicVOID" customModuleProvider="target" sceneMemberID="viewController">
@@ -45,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="music-playing-art-background" translatesAutoresizingMaskIntoConstraints="NO" id="tBj-HR-hWA">
-                                <rect key="frame" x="0.0" y="138" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="376"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OiC-ts-Avj">
@@ -342,28 +378,6 @@
                                     <outletCollection property="gestureRecognizers" destination="77N-Ze-f6c" appends="YES" id="iWF-BA-Uli"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlZ-dT-NA1">
-                                <rect key="frame" x="16" y="564" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Reset">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetAction:" destination="uFf-D1-UdL" eventType="touchUpInside" id="eWa-SL-Cls"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Bs-hB-CfB">
-                                <rect key="frame" x="146" y="564" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Vote">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="voteAction:" destination="uFf-D1-UdL" eventType="touchUpInside" id="p2k-Zr-pI5"/>
-                                </connections>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="S3M-7z-JEM">
                                 <rect key="frame" x="293" y="563" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -373,10 +387,6 @@
                                     <action selector="voteSwitchAction:" destination="uFf-D1-UdL" eventType="valueChanged" id="Kzh-Qk-rGP"/>
                                 </connections>
                             </switch>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="music-playing-art-background" translatesAutoresizingMaskIntoConstraints="NO" id="wy8-Uy-59Q">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Hey-DJ!   " textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-ja-ppj">
                                 <rect key="frame" x="16" y="38" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -400,8 +410,8 @@
                             <outletCollection property="gestureRecognizers" destination="RQZ-SB-JRY" appends="YES" id="MpK-ja-lZs"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="musicVote" selectedImage="musicVote" id="eyx-ag-ocG">
-                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <tabBarItem key="tabBarItem" title="Quiz" image="tabbar_quiz-22" selectedImage="tabbar_quiz-22" id="eyx-ag-ocG">
+                        <color key="badgeColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="nowPlayingArtistLabel" destination="LBR-ja-ppj" id="eij-gc-nbG"/>
@@ -445,9 +455,9 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1050.4000000000001" y="1604.3478260869567"/>
+            <point key="canvasLocation" x="-937" y="1458"/>
         </scene>
-        <!--Start View Controller-->
+        <!--Player-->
         <scene sceneID="ZNZ-ae-kLL">
             <objects>
                 <viewController id="cPx-gU-I9k" customClass="StartViewController" customModule="musicVOID" customModuleProvider="target" sceneMemberID="viewController">
@@ -464,11 +474,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Irina Slovinanski" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVy-n3-tJN" customClass="UILabelX" customModule="musicVOID" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="375"/>
+                                        <rect key="frame" x="16" y="108" width="345" height="345"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="BoldDotDigital-7" family="Bold Dot Digital-7" pointSize="20"/>
-                                        <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
+                                        <fontDescription key="fontDescription" name="BoldDotDigital-7" family="Bold Dot Digital-7" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="highlightedColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="shadowColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="angle">
@@ -480,12 +491,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbX-CK-Kih" customClass="UILabelX" customModule="musicVOID" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="375"/>
+                                        <rect key="frame" x="16" y="108" width="345" height="345"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="BoldDotDigital-7" family="Bold Dot Digital-7" pointSize="25"/>
-                                        <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BoldDotDigital-7" family="Bold Dot Digital-7" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="angle">
@@ -496,18 +509,27 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4C-mc-Tzg" customClass="RoundCornerView" customModule="musicVOID" customModuleProvider="target">
-                                        <rect key="frame" x="27" y="127" width="320" height="320"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view alpha="0.90000000000000002" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4C-mc-Tzg" customClass="RoundCornerView" customModule="musicVOID" customModuleProvider="target">
+                                        <rect key="frame" x="43" y="135" width="290" height="290"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="REL-fN-XV3" appends="YES" id="sIn-HH-O7S"/>
+                                        </connections>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </scrollView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eVU-FR-Hfl">
+                            <progressView opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eVU-FR-Hfl">
                                 <rect key="frame" x="0.0" y="70" width="375" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="progressTintColor" red="0.23349821570000001" green="0.34203419089999998" blue="0.62014102940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ci7-9m-xkb" customClass="FrostyView" customModule="musicVOID" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -523,6 +545,7 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0N8-Jd-Nin" customClass="FrostyView" customModule="musicVOID" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="564" width="375" height="105"/>
@@ -579,7 +602,7 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epU-aq-lxZ">
-                                        <rect key="frame" x="244" y="22" width="18" height="18"/>
+                                        <rect key="frame" x="247" y="21" width="18" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="noun_255299_cc kopi"/>
                                         <connections>
@@ -587,19 +610,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUp-GD-tzs">
-                                        <rect key="frame" x="118" y="22" width="18" height="18"/>
+                                        <rect key="frame" x="107" y="21" width="18" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="noun_255300_cc kopi"/>
                                         <connections>
                                             <action selector="previousAction:" destination="cPx-gU-I9k" eventType="touchUpInside" id="4lN-bH-f1v"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-c5-Z5Y">
-                                        <rect key="frame" x="174" y="9" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="noun_255297_cc kopi"/>
-                                        <connections>
-                                            <action selector="playButton:" destination="cPx-gU-I9k" eventType="touchUpInside" id="kzJ-Rw-dxy"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdT-du-ZHY">
@@ -613,23 +628,41 @@
                                     <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTt-gp-75S">
                                         <rect key="frame" x="12" y="13" width="38" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="noun_255315_cc"/>
+                                        <color key="tintColor" red="1" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="noun_255315_cc">
+                                            <color key="titleShadowColor" red="1" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-c5-Z5Y">
+                                        <rect key="frame" x="170" y="10" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="noun_255297_cc kopi">
+                                            <color key="titleColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playButton:" destination="cPx-gU-I9k" eventType="touchUpInside" id="kzJ-Rw-dxy"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="lzU-fk-eKd">
+                            <progressView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="lzU-fk-eKd">
                                 <rect key="frame" x="0.0" y="616" width="375" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="progressTintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9Ua-vw-W3t"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="musicSetPlaylist" selectedImage="musicSetPlaylist" id="CwR-tx-9eY"/>
+                    <tabBarItem key="tabBarItem" title="Player" image="tabbar_music-22" selectedImage="tabbar_music-22" id="CwR-tx-9eY">
+                        <color key="badgeColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="artistLabel" destination="uVy-n3-tJN" id="8OX-RC-yg9"/>
                         <outlet property="coverImageView" destination="j4C-mc-Tzg" id="Pcm-Rm-Qve"/>
@@ -645,21 +678,28 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBg-Kj-8NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="REL-fN-XV3">
+                    <connections>
+                        <action selector="tapCoverImage:" destination="cPx-gU-I9k" id="0Q1-OI-JN5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-365.60000000000002" y="1601.649175412294"/>
+            <point key="canvasLocation" x="-1569" y="1458"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow_up_and_down" width="700" height="700"/>
         <image name="hey-dj-black-back" width="250" height="250"/>
         <image name="music-playing-art-background" width="400" height="400"/>
-        <image name="musicSetPlaylist" width="25" height="25"/>
-        <image name="musicVote" width="25" height="25"/>
         <image name="music_VOID_Logo_V2_3-bB-smaller-b" width="3238" height="1111"/>
         <image name="noun_1229052_cc-copy" width="291" height="234"/>
         <image name="noun_255297_cc kopi" width="228" height="259"/>
         <image name="noun_255299_cc kopi" width="270" height="247"/>
         <image name="noun_255300_cc kopi" width="272" height="247"/>
         <image name="noun_255315_cc" width="700" height="700"/>
+        <image name="tabbar_music-22" width="32" height="48"/>
+        <image name="tabbar_profile_start" width="24" height="22"/>
+        <image name="tabbar_quiz-22" width="32" height="48"/>
+        <image name="tabbar_request" width="21" height="32"/>
     </resources>
 </document>

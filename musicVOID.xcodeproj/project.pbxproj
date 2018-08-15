@@ -130,9 +130,6 @@
 				5C77F0702094502300DD39A7 /* Music.swift */,
 				5C77F07720948CF600DD39A7 /* Constants.swift */,
 				5C1D5B9E209445DA0025172A /* Functions.swift */,
-				5C98BB442122009A0004EB84 /* FrostyView.swift */,
-				5C98BB452122009B0004EB84 /* FrostyTabBar.swift */,
-				5C486E3A2121C0D100F63214 /* CALayer+addShadow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,12 +137,15 @@
 		5C1D5B93209445280025172A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5C1D5BA0209446170025172A /* UILabelX.swift */,
+				5C98BB442122009A0004EB84 /* FrostyView.swift */,
+				5C98BB452122009B0004EB84 /* FrostyTabBar.swift */,
 				5C1D5BA4209446710025172A /* MusicPlaylistTableViewCell.swift */,
 				5C486E3E2121E30000F63214 /* RoundCornerView.swift */,
 				5C1D5BA2209446510025172A /* CoverImageView.swift */,
 				5C77F0742094850E00DD39A7 /* CustomTableView.swift */,
 				5C26BFE52095578B0090ADAE /* IHWaveFormView.swift */,
-				5C1D5BA0209446170025172A /* UILabelX.swift */,
+				5C486E3A2121C0D100F63214 /* CALayer+addShadow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,6 +156,17 @@
 				5C1D5B9C209445B70025172A /* DataService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		5CBBF8C72123328B00197B75 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5CFC35AB209441C200B34A0D /* Assets.xcassets */,
+				5C1D5B942094455F0025172A /* bold_dot_digital-7.ttf */,
+				5C1D5B952094455F0025172A /* dotty fold.ttf */,
+				5C1D5B96209445600025172A /* enhanced_dot_digital-7.ttf */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		5CFC3598209441C100B34A0D = {
@@ -179,6 +190,7 @@
 		5CFC35A3209441C100B34A0D /* musicVOID */ = {
 			isa = PBXGroup;
 			children = (
+				5CBBF8C72123328B00197B75 /* Library */,
 				5C77F0762094853600DD39A7 /* Service */,
 				5C1D5B922094451F0025172A /* Model */,
 				5C1D5B93209445280025172A /* View */,
@@ -186,12 +198,8 @@
 				5CFC35A4209441C100B34A0D /* AppDelegate.swift */,
 				5CFC35AD209441C200B34A0D /* LaunchScreen.storyboard */,
 				5CFC35A8209441C100B34A0D /* Main.storyboard */,
-				5CFC35AB209441C200B34A0D /* Assets.xcassets */,
-				5C1D5B942094455F0025172A /* bold_dot_digital-7.ttf */,
-				5C1D5B952094455F0025172A /* dotty fold.ttf */,
-				5C1D5B96209445600025172A /* enhanced_dot_digital-7.ttf */,
-				5CFC35B0209441C200B34A0D /* Info.plist */,
 				5CB38D642094434C00867CF3 /* GoogleService-Info.plist */,
+				5CFC35B0209441C200B34A0D /* Info.plist */,
 			);
 			path = musicVOID;
 			sourceTree = "<group>";

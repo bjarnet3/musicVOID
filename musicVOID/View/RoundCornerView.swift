@@ -16,25 +16,20 @@ class RoundCornerView: UIView {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupView(image: image)
-    }
-    
-    func setupView(image: UIImage?) {
+    private func setupView(image: UIImage?) {
         // add the shadow to the base view
         backgroundColor = UIColor.clear
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 2.8, height: 4)
-        layer.shadowOpacity = 0.50
-        layer.shadowRadius = 6.2
+        layer.shadowColor = PINK_DARK_SOLID.cgColor
+        layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
+        layer.shadowOpacity = 0.93
+        layer.shadowRadius = 10.95
         
         // add the border to subview
         let borderView = UIView()
         borderView.frame = bounds
         borderView.layer.cornerRadius = self.frame.height / 2
-        // borderView.layer.borderColor = UIColor.black.cgColor
-        // borderView.layer.borderWidth = 0.5
+        borderView.layer.borderColor = WHITE_ALPHA.cgColor
+        borderView.layer.borderWidth = 3.45
         borderView.layer.masksToBounds = true
         borderView.isUserInteractionEnabled = false
         addSubview(borderView)
@@ -42,8 +37,28 @@ class RoundCornerView: UIView {
         // add any other subcontent that you want clipped
         let otherSubContent = UIImageView()
         otherSubContent.image = image
-        otherSubContent.frame = borderView.bounds
+        otherSubContent.frame = bounds
         otherSubContent.isUserInteractionEnabled = false
         borderView.addSubview(otherSubContent)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        for view in subviews {
+            view.setNeedsDisplay()
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.autoresizesSubviews = true
+        setupView(image: image)
+    }
+    
+    
 }

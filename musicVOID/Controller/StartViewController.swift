@@ -50,6 +50,7 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     var timeFull : Int = 0
     var timeCurrent : Int = 0
     var timeLeft : Int = 0
+    var quickTimer = Timer()
     
     var progressStep : Float = 0.0
     var progressCurrent : Float = 0.0
@@ -453,6 +454,78 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         mediaPicker.dismiss(animated: true, completion: nil)
     }
     
+    private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
+        if let progressView = self.progressView {
+            if animated {
+                progressView.setProgress(progress, animated: animated)
+                UIView.animate(withDuration: 0.90, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    progressView.alpha = alpha
+                })
+            } else {
+                progressView.setProgress(progress, animated: animated)
+                progressView.alpha = alpha
+            }
+        }
+    }
+    
+    var remoteMiniMized = true
+    var remoteMidiMized = false
+    var scrollActive = false
+    
+    func maxiMizeRemote() {
+        self.tableBackView.frame = CGRect(x: 0, y: 68, width: 375, height: 601)
+    }
+    
+    func midiMizeRemote() {
+        hapticButton(.medium)
+        // SHOW REMOTE
+        // -----------
+        UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+            self.tableBackView.frame = CGRect(x: 0, y: 339, width: 375, height: 330)
+            self.tableBackView.layer.cornerRadius = 28
+        })
+        setProgress(progress: 0.9, animated: true, alpha: 1.0)
+        self.remoteMiniMized = false
+        self.remoteMidiMized = true
+        UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+            
+        })
+        setProgress(progress: 1.0, animated: true, alpha: 0.0)
+    }
+    
+    func miniMizeRemote() {
+        hapticButton(.medium)
+        // SHOW REMOTE
+        // -----------
+        UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+            self.tableBackView.frame = CGRect(x: 0, y: 564, width: 375, height: 105)
+            self.tableBackView.layer.cornerRadius = 28
+        })
+        
+        setProgress(progress: 0.5, animated: true, alpha: 1.0)
+        self.remoteMiniMized = true
+        self.remoteMidiMized = false
+        UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
+            
+        })
+        setProgress(progress: 0.0, animated: true, alpha: 0.0)
+    }
+    
+    func basicSetup() {
+        
+        self.progressView.backgroundColor = UIColor.clear
+        self.progressView.layer.shadowColor = PINK_DARK_SOLID.cgColor
+        self.progressView.layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
+        self.progressView.layer.shadowOpacity = 0.95
+        self.progressView.layer.shadowRadius = 11.0
+        
+        self.musicProgress.backgroundColor = UIColor.clear
+        self.musicProgress.layer.shadowColor = PINK_DARK_SOLID.cgColor
+        self.musicProgress.layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
+        self.musicProgress.layer.shadowOpacity = 0.95
+        self.musicProgress.layer.shadowRadius = 11.0
+    }
+    
     // MARK: - Actions
     @IBAction func playButton(_ sender: Any) {
         if musicPlayer.playbackState == .paused {
@@ -482,93 +555,56 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         updateMusicTimer()
     }
     
-    var remoteMiniMized = true
-    var remoteMidiMized = false
-    
-    func maxiMizeRemote() {
-        self.tableBackView.frame = CGRect(x: 0, y: 68, width: 375, height: 601)
-    }
-    
     @IBAction func showRemoteAction(_ sender: UIButton) {
         setProgress(progress: 0.4, animated: true, alpha: 0.8)
         // self.tableBackView.transform
         if self.remoteMiniMized {
-            hapticButton(.medium)
-            // SHOW REMOTE
-            // -----------
-            UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
-                self.tableBackView.frame = CGRect(x: 0, y: 339, width: 375, height: 330)
-                self.tableBackView.layer.cornerRadius = 28
-            })
-            setProgress(progress: 0.9, animated: true, alpha: 1.0)
-            self.remoteMiniMized = false
-            self.remoteMidiMized = true
-            UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
-                
-            })
-            setProgress(progress: 1.0, animated: true, alpha: 0.0)
+            self.midiMizeRemote()
         } else if self.remoteMidiMized {
-            hapticButton(.medium)
-            // SHOW REMOTE
-            // -----------
-            UIView.animate(withDuration: 0.58, delay: 0.00, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
-                self.tableBackView.frame = CGRect(x: 0, y: 564, width: 375, height: 105)
-                self.tableBackView.layer.cornerRadius = 28
-            })
-            
-            setProgress(progress: 0.5, animated: true, alpha: 1.0)
-            self.remoteMiniMized = true
-            self.remoteMidiMized = false
-            UIView.animate(withDuration: 0.71, delay: 0.034, usingSpringWithDamping: 0.50, initialSpringVelocity: 0.34, options: .curveEaseOut, animations: {
-                
-            })
-            setProgress(progress: 0.0, animated: true, alpha: 0.0)
+            self.miniMizeRemote()
         }
     }
     
-    private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
-        if let progressView = self.progressView {
-            if animated {
-                progressView.setProgress(progress, animated: animated)
-                UIView.animate(withDuration: 0.90, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    progressView.alpha = alpha
-                })
-            } else {
-                progressView.setProgress(progress, animated: animated)
-                progressView.alpha = alpha
-            }
+    @IBAction func tapCoverImage(_ sender: UITapGestureRecognizer) {
+        if self.remoteMidiMized {
+            self.miniMizeRemote()
+        } else if self.remoteMiniMized {
+            self.midiMizeRemote()
         }
     }
-    
 }
 
 extension StartViewController : UIScrollViewDelegate {
     // Search for: scrollViewDidScroll UIVisualEffect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         if scrollView == self.scrollView {
             let contentOffset = scrollView.contentOffset.y < 0 ? -scrollView.contentOffset.y : scrollView.contentOffset.y
-            
-            let scaleMAX = (contentOffset * 0.001075) + (0.995 - 0.001075)
-            let scaleMIN:CGFloat = 0.965
-            
-            if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
-                self.coverImageView.transform = CGAffineTransform(scaleX: scaleMAX, y: scaleMAX)
-            } else if scrollView.contentOffset.y == 0 {
-                UIView.animate(withDuration: 0.60, delay: 0.001, usingSpringWithDamping: 0.20, initialSpringVelocity: 0.15, options: .curveEaseIn, animations: {
-                    self.coverImageView.transform = CGAffineTransform(scaleX: scaleMIN, y: scaleMIN)
-                })
-            }
- 
+            let scaleMIN:CGFloat = 1.0
+            let scaleMAX = (contentOffset * 0.00100) + (scaleMIN - 0.00100)
+            self.coverImageView.transform = CGAffineTransform(scaleX: scaleMAX, y: scaleMAX)
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         print("scrollViewWillBeginDragging")
+        self.scrollActive = true
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView.contentOffset.y <= -80 {
-            print("scrollViewWillEndDragging: \(velocity) with -80 in offset ")
+        print("scrollViewWillEndDragging: \(velocity) with -80 in offset ")
+        
+        if scrollView == self.scrollView {
+            if scrollView.contentOffset.y <= -80 {
+                if self.scrollActive {
+                    self.miniMizeRemote()
+                }
+            } else if scrollView.contentOffset.y >= 80 {
+                if self.scrollActive {
+                    self.midiMizeRemote()
+                }
+            }
+            self.scrollActive = false
         }
     }
     
