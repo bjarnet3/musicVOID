@@ -14,23 +14,26 @@ import SoundWaveForm
 import Foundation
 import AVFoundation
 
-class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
+class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     // MARK: - Outlet Properties
     @IBOutlet weak var coverImageView: RoundCornerView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var minimizeButton: UIButton!
     
     @IBOutlet weak var artistLabel: UILabelX!
     @IBOutlet weak var titleLabel: UILabelX!
     @IBOutlet weak var logoImageView: UIImageView!
-    
-    @IBOutlet weak var minimize: UIButton!
+
     @IBOutlet weak var musicProgress: UIProgressView!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var playlistProgress: UIProgressView!
     
-    @IBOutlet weak var tableBackView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableBackView: UIView!
+    @IBOutlet weak var waveFormView: IHWaveFormView!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+
     
     // MARK: - Media Player and Playlist Properties
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
@@ -455,7 +458,7 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
-        if let progressView = self.progressView {
+        if let progressView = self.playlistProgress {
             if animated {
                 progressView.setProgress(progress, animated: animated)
                 UIView.animate(withDuration: 0.90, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
@@ -513,11 +516,11 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     func basicSetup() {
         
-        self.progressView.backgroundColor = UIColor.clear
-        self.progressView.layer.shadowColor = PINK_DARK_SOLID.cgColor
-        self.progressView.layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
-        self.progressView.layer.shadowOpacity = 0.95
-        self.progressView.layer.shadowRadius = 11.0
+        self.playlistProgress.backgroundColor = UIColor.clear
+        self.playlistProgress.layer.shadowColor = PINK_DARK_SOLID.cgColor
+        self.playlistProgress.layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
+        self.playlistProgress.layer.shadowOpacity = 0.95
+        self.playlistProgress.layer.shadowRadius = 11.0
         
         self.musicProgress.backgroundColor = UIColor.clear
         self.musicProgress.layer.shadowColor = PINK_DARK_SOLID.cgColor
@@ -555,6 +558,14 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
         updateMusicTimer()
     }
     
+    @IBAction func shuffleAction(_ sender: UIButton) {
+        waveFormView.preRenderAudioFile(withPath: (musicPlayer.nowPlayingItem?.assetURL)!, completion: {_ in
+            self.pauseAction()
+        })
+        waveFormView.
+    }
+    
+    
     @IBAction func showRemoteAction(_ sender: UIButton) {
         setProgress(progress: 0.4, animated: true, alpha: 0.8)
         // self.tableBackView.transform
@@ -574,7 +585,7 @@ class StartViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
 }
 
-extension StartViewController : UIScrollViewDelegate {
+extension PlayViewController : UIScrollViewDelegate {
     // Search for: scrollViewDidScroll UIVisualEffect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -630,7 +641,7 @@ extension StartViewController : UIScrollViewDelegate {
     
 }
 
-extension StartViewController: UITableViewDataSource, UITableViewDelegate {
+extension PlayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func scrollToIndex(at: Int, select: Bool, andDeselectRow: Bool) {
         let winnerIndex = IndexPath(row: at, section: 0)

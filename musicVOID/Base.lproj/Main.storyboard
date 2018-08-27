@@ -72,7 +72,7 @@
             </objects>
             <point key="canvasLocation" x="332" y="1458"/>
         </scene>
-        <!--Quiz-->
+        <!--Music Vote-->
         <scene sceneID="L8N-wc-gRL">
             <objects>
                 <viewController id="uFf-D1-UdL" customClass="VoteViewController" customModule="musicVOID" customModuleProvider="target" sceneMemberID="viewController">
@@ -410,7 +410,7 @@
                             <outletCollection property="gestureRecognizers" destination="RQZ-SB-JRY" appends="YES" id="MpK-ja-lZs"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Quiz" image="tabbar_quiz-22" selectedImage="tabbar_quiz-22" id="eyx-ag-ocG">
+                    <tabBarItem key="tabBarItem" title="Music Vote" image="tabbar_quiz-22" selectedImage="tabbar_quiz-22" id="eyx-ag-ocG">
                         <color key="badgeColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
@@ -460,7 +460,7 @@
         <!--Player-->
         <scene sceneID="ZNZ-ae-kLL">
             <objects>
-                <viewController id="cPx-gU-I9k" customClass="StartViewController" customModule="musicVOID" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cPx-gU-I9k" customClass="PlayViewController" customModule="musicVOID" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KgH-d1-OO4" customClass="FrostyView" customModule="musicVOID" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,6 +473,16 @@
                                         <rect key="frame" x="78" y="0.0" width="220" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <view alpha="0.90000000000000002" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4C-mc-Tzg" customClass="RoundCornerView" customModule="musicVOID" customModuleProvider="target">
+                                        <rect key="frame" x="43" y="135" width="290" height="290"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="REL-fN-XV3" appends="YES" id="sIn-HH-O7S"/>
+                                        </connections>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Irina Slovinanski" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVy-n3-tJN" customClass="UILabelX" customModule="musicVOID" customModuleProvider="target">
                                         <rect key="frame" x="16" y="108" width="345" height="345"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -509,15 +519,10 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <view alpha="0.90000000000000002" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4C-mc-Tzg" customClass="RoundCornerView" customModule="musicVOID" customModuleProvider="target">
-                                        <rect key="frame" x="43" y="135" width="290" height="290"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIx-im-krQ" customClass="IHWaveFormView" customModule="musicVOID" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="30" width="359" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="REL-fN-XV3" appends="YES" id="sIn-HH-O7S"/>
-                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -632,6 +637,9 @@
                                         <state key="normal" image="noun_255315_cc">
                                             <color key="titleShadowColor" red="1" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shuffleAction:" destination="cPx-gU-I9k" eventType="touchUpInside" id="AUu-ub-Btm"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-c5-Z5Y">
                                         <rect key="frame" x="170" y="10" width="32" height="32"/>
@@ -667,14 +675,15 @@
                         <outlet property="artistLabel" destination="uVy-n3-tJN" id="8OX-RC-yg9"/>
                         <outlet property="coverImageView" destination="j4C-mc-Tzg" id="Pcm-Rm-Qve"/>
                         <outlet property="logoImageView" destination="e81-lD-OnE" id="d2j-aK-QPp"/>
-                        <outlet property="minimize" destination="vdT-du-ZHY" id="UlC-PW-dQd"/>
+                        <outlet property="minimizeButton" destination="vdT-du-ZHY" id="UlC-PW-dQd"/>
                         <outlet property="musicProgress" destination="eVU-FR-Hfl" id="CNl-Bf-XLc"/>
                         <outlet property="playButton" destination="Yah-c5-Z5Y" id="aef-bs-sUl"/>
-                        <outlet property="progressView" destination="lzU-fk-eKd" id="ZId-EW-kFi"/>
+                        <outlet property="playlistProgress" destination="lzU-fk-eKd" id="ZId-EW-kFi"/>
                         <outlet property="scrollView" destination="9r0-ws-yhg" id="4Dl-Ij-ZUz"/>
                         <outlet property="tableBackView" destination="0N8-Jd-Nin" id="ShW-lF-kuO"/>
                         <outlet property="tableView" destination="2e6-Zz-8zT" id="KEl-07-mHS"/>
                         <outlet property="titleLabel" destination="UbX-CK-Kih" id="vRE-cT-ihB"/>
+                        <outlet property="waveFormView" destination="SIx-im-krQ" id="ccI-9K-R5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBg-Kj-8NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -684,7 +693,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1569" y="1458"/>
+            <point key="canvasLocation" x="-1570.4000000000001" y="1457.7211394302849"/>
         </scene>
     </scenes>
     <resources>

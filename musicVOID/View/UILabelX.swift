@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class UILabelX: UILabel {
     // *******************************************************
     // DEFINITIONS (Because I'm not brilliant and I'll forget most this tomorrow.)
