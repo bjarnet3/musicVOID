@@ -71,44 +71,7 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     var songsPlayed = 0
     var minimumSongsBetweenSongs = 2
     
-    // MARK: - View Did Load
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Set tableView
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0)
-        
-        scrollView.delegate = self
-        scrollView.delegate = self
-        
-        // Set tableBackView
-        tableBackView.clipsToBounds = true
-        tableBackView.layer.cornerRadius = 28
-        tableBackView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        
-        // removeDatabaseValues(at: .voting)
-        syncDatabasePlaylists()
-        changedNowPlaying()
-        
-        addParallaxEffectOnView(self.coverImageView, 22)
-        addParallaxEffectOnView(self.artistLabel, 8)
-        addParallaxEffectOnView(self.titleLabel, 8)
-        addParallaxEffectOnView(self.logoImageView, 10)
-    }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let tab = self.tabBarController?.tabBar as! FrostyTabBar
-        tab.setEffect(blurEffect: .light)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setProgress(progress: 0.0, animated: true, alpha: 0.0)
-    }
     
     // MARK: - Player functions
     func nowPlaying() {
@@ -121,14 +84,14 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
     }
     
-    func playAction() {
+    func playMusic() {
         musicPlayer.play()
         playButton.setImage(UIImage(named: "noun_255303_cc kopi"), for: .normal)
         nowPlaying()
         updateMusicTimer()
     }
     
-    func pauseAction() {
+    func pauseMusic() {
         musicPlayer.pause()
         playButton.setImage(UIImage(named: "noun_255297_cc kopi"), for: .normal)
         timer.invalidate()
@@ -186,7 +149,7 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
                 let collection = MPMediaItemCollection(items: self.musicPlaylist)
                 self.musicPlayer.setQueue(with: collection)
                 self.musicPlayer.prepareToPlay()
-                self.pauseAction()
+                self.pauseMusic()
                 self.nowPlaying()
                 self.tableView.reloadData()
                 for persistentID in firebasePersistIDs {
@@ -343,10 +306,10 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
             musicPlayer.nowPlayingItem = collection.items[getIndex(from: winnerID)]
             self.scrollToIndex(at: self.getIndex(from: winnerID), select: true, andDeselectRow: true)
             musicWinnerID = nil
-            playAction()
+            playMusic()
         } else {
             musicPlayer.skipToNextItem()
-            playAction()
+            playMusic()
             changedNowPlaying()
         }
     }
@@ -397,8 +360,10 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func updateTitle() {
-        self.artistLabel.rotation = timeCurrent
-        self.titleLabel.rotation = -timeCurrent
+        UIView.animate(withDuration: 1.0, delay: 0.00, usingSpringWithDamping: 1.00, initialSpringVelocity: 0.3, options: .curveEaseInOut, animations: {
+            self.artistLabel.rotation = self.timeCurrent
+            self.titleLabel.rotation = -self.timeCurrent
+        })
     }
     
     @objc func updateCommandsInTime() {
@@ -470,7 +435,7 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
         musicPlayer.setQueue(with: mediaItemCollection)
         musicPlayer.prepareToPlay()
-        pauseAction()
+        pauseMusic()
         tableView.reloadData()
         mediaPicker.dismiss(animated: true, completion: nil)
     }
@@ -573,7 +538,6 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     // MARK: - Actions
-    
     @IBAction func browseAction(_ sender: Any) {
         let mediaPickerVC = MPMediaPickerController(mediaTypes: .music)
         mediaPickerVC.allowsPickingMultipleItems = true
@@ -588,17 +552,14 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         
         tableView.reloadData()
     }
-    
-    
+
     @IBAction func playButton(_ sender: Any) {
         if musicPlayer.playbackState == .paused {
-            playAction()
+            playMusic()
         } else {
-            pauseAction()
+            pauseMusic()
         }
     }
-    
-
     
     @IBAction func nextAction(_ sender: Any) {
         musicPlayer.skipToNextItem()
@@ -616,9 +577,6 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         setupFDWave()
     }
     
-
-    
-    
     @IBAction func showRemoteAction(_ sender: UIButton) {
         setProgress(progress: 0.4, animated: true, alpha: 0.8)
         // self.tableBackView.transform
@@ -635,6 +593,47 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         } else if self.remoteMiniMized {
             self.midiMizeRemote()
         }
+    }
+}
+
+extension PlayViewController {
+    // MARK: - View Did Load
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Set tableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0)
+        
+        scrollView.delegate = self
+        scrollView.delegate = self
+        
+        // Set tableBackView
+        tableBackView.clipsToBounds = true
+        tableBackView.layer.cornerRadius = 28
+        tableBackView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        // removeDatabaseValues(at: .voting)
+        syncDatabasePlaylists()
+        changedNowPlaying()
+        
+        addParallaxEffectOnView(self.coverImageView, 22)
+        addParallaxEffectOnView(self.artistLabel, 8)
+        addParallaxEffectOnView(self.titleLabel, 8)
+        addParallaxEffectOnView(self.logoImageView, 10)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tab = self.tabBarController?.tabBar as! FrostyTabBar
+        tab.setEffect(blurEffect: .light)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setProgress(progress: 0.0, animated: true, alpha: 0.0)
     }
 }
 
@@ -735,7 +734,7 @@ extension PlayViewController: UITableViewDataSource, UITableViewDelegate {
         // musicPlayer.setQueue(with: MPMediaItemCollection(items: musicPlaylist))
         let collection = MPMediaItemCollection(items: musicPlaylist)
         musicPlayer.nowPlayingItem = collection.items[indexPath.row]
-        playAction()
+        playMusic()
         changedNowPlaying()
         tableView.deselectRow(at: indexPath, animated: true)
         self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
