@@ -13,6 +13,7 @@ import MBCircularProgressBar
 import SoundWaveForm
 import Foundation
 import AVFoundation
+import FDWaveformView
 
 class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     
@@ -30,10 +31,14 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableBackView: UIView!
-    @IBOutlet weak var waveFormView: IHWaveFormView!
+    @IBOutlet weak var fdWaveFormView: FDWaveformView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
 
+    fileprivate var startRendering = Date()
+    fileprivate var endRendering = Date()
+    fileprivate var startLoading = Date()
+    fileprivate var endLoading = Date()
+    fileprivate var profileResult = ""
     
     // MARK: - Media Player and Playlist Properties
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
@@ -200,28 +205,7 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
             eventInFirebase.child(location).removeValue()
         }
     }
-    
-    func postImageToFirebase(image: UIImage?, persistID: String) {
-        if let img = image {
-            if let imgData = UIImageJPEGRepresentation(img, 0.4) {
-                let imageUid = NSUUID().uuidString
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                DataService.connect.REF_MUSIC_EVENT_IMAGES.child(imageUid).putData(imgData, metadata: metadata) { (metadata, error) in
-                    if error != nil {
-                        print("Unable to upload image to Firebase storage")
-                    } else {
-                        let downloadURL = metadata?.downloadURL()?.absoluteString
-                        if downloadURL != nil {
-                            let imageLocationInPersistID : [String : String] = [
-                                "imageLocation" : downloadURL!]
-                            DataService.connect.REF_EVENTS.child(eventID).child("playlist").child(persistID).updateChildValues(imageLocationInPersistID)
-                        }
-                    }
-                }
-            }
-        }
-    }
+
     
     func appendToMusicVoteArray(from: String) {
         for music in musicPlaylist {
@@ -270,10 +254,48 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
                     if music.persistentID.description == persistID {
                         let image = music.artwork?.image(at: CGSize(width: 100, height: 100))
                         self.postImageToFirebase(image: image, persistID: persistID)
+                        print(persistID)
                     }
                 }
             }
         })
+    }
+    
+    func postImageToFirebase(image: UIImage?, persistID: String) {
+        if let img = image {
+            if let imgData = UIImageJPEGRepresentation(img, 0.4) {
+                // Unique image identifier
+                let imageUID = NSUUID().uuidString
+                // Set metaData for the image
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                
+                let storageREF = DataService.connect.REF_MUSIC_IMAGES.child("\(imageUID).jpg")
+                storageREF.putData(imgData, metadata: metadata) { (metadata, error) in
+                    if error != nil {
+                        print("Unable to upload image to Firebase storage")
+                    } else {
+                        print("postImageToFirebase: Successfully uploaded image to Firebase storage")
+
+                        storageREF.downloadURL { (url, err) in
+                            if let absoluteUrlString = url?.absoluteString {
+                                print(absoluteUrlString)
+                                let imageLocationInPersistID : [String : String] = [
+                                    "imageLocation" : absoluteUrlString]
+                                
+                                let databaseREF = DataService.connect.REF_EVENTS.child(eventID).child("playlist").child(persistID)
+                                databaseREF.updateChildValues(imageLocationInPersistID)
+                                
+                                print(imageLocationInPersistID)
+                            } else {
+                                print("unable to get imageLocation")
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func sendMusicUpForVote() {
@@ -529,14 +551,28 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         self.musicProgress.layer.shadowRadius = 11.0
     }
     
-    // MARK: - Actions
-    @IBAction func playButton(_ sender: Any) {
-        if musicPlayer.playbackState == .paused {
-            playAction()
-        } else {
-            pauseAction()
+    func setupFDWave() {
+        if let playingURL = musicPlayer.nowPlayingItem?.assetURL {
+            // Animate the waveform view in when it is rendered
+            fdWaveFormView.delegate = self
+            fdWaveFormView.alpha = 0.0
+            fdWaveFormView.audioURL = playingURL
+            fdWaveFormView.zoomSamples = 0 ..< fdWaveFormView.totalSamples / 3
+            fdWaveFormView.doesAllowScrubbing = true
+            fdWaveFormView.doesAllowStretch = true
+            fdWaveFormView.doesAllowScroll = true
         }
     }
+    
+    func showFDWave() {
+        UIView.animate(withDuration: 0.3, animations: {
+            print(self.fdWaveFormView.totalSamples)
+            let random = Int(arc4random()) % self.fdWaveFormView.totalSamples
+            self.fdWaveFormView.highlightedSamples = 0 ..< random
+        })
+    }
+    
+    // MARK: - Actions
     
     @IBAction func browseAction(_ sender: Any) {
         let mediaPickerVC = MPMediaPickerController(mediaTypes: .music)
@@ -545,6 +581,24 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
         mediaPickerVC.delegate = self
         present(mediaPickerVC, animated: true, completion: nil)
     }
+    
+    @IBAction func resetPlaylistAction(_ sender: Any) {
+        musicPlaylist.removeAll()
+        musicPlaylistOrder.removeAll()
+        
+        tableView.reloadData()
+    }
+    
+    
+    @IBAction func playButton(_ sender: Any) {
+        if musicPlayer.playbackState == .paused {
+            playAction()
+        } else {
+            pauseAction()
+        }
+    }
+    
+
     
     @IBAction func nextAction(_ sender: Any) {
         musicPlayer.skipToNextItem()
@@ -559,11 +613,10 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     @IBAction func shuffleAction(_ sender: UIButton) {
-        waveFormView.preRenderAudioFile(withPath: (musicPlayer.nowPlayingItem?.assetURL)!, completion: {_ in
-            self.pauseAction()
-        })
-        waveFormView.
+        setupFDWave()
     }
+    
+
     
     
     @IBAction func showRemoteAction(_ sender: UIButton) {
@@ -690,5 +743,30 @@ extension PlayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return musicPlaylist.count
+    }
+}
+
+extension PlayViewController: FDWaveformViewDelegate {
+    func waveformViewWillRender(_ waveformView: FDWaveformView) {
+        startRendering = Date()
+    }
+    
+    func waveformViewDidRender(_ waveformView: FDWaveformView) {
+        endRendering = Date()
+        NSLog("FDWaveformView rendering done, took %0.3f seconds", endRendering.timeIntervalSince(startRendering))
+        profileResult.append(String(format: " render %0.3f ", endRendering.timeIntervalSince(startRendering)))
+        UIView.animate(withDuration: 0.25, animations: {() -> Void in
+            waveformView.alpha = 1.0
+        })
+    }
+    
+    func waveformViewWillLoad(_ waveformView: FDWaveformView) {
+        startLoading = Date()
+    }
+    
+    func waveformViewDidLoad(_ waveformView: FDWaveformView) {
+        endLoading = Date()
+        NSLog("FDWaveformView loading done, took %0.3f seconds", endLoading.timeIntervalSince(startLoading))
+        profileResult.append(String(format: " load %0.3f ", endLoading.timeIntervalSince(startLoading)))
     }
 }

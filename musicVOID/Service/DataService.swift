@@ -30,31 +30,21 @@ class DataService {
     private var _REF_BASE = DB_BASE
     
     // DB child references // Base "folders"
-    private var _REF_USERS = DB_BASE.child("users")
     private var _REF_EVENTS = DB_BASE.child("events")
     
     // Storage references
-    private var _REF_PROFILE_IMAGES = STORAGE_BASE.child("profile").child(userID)
-    private var _REF_MUSIC_EVENT_IMAGES = STORAGE_BASE.child("musicArt").child("Event").child(eventID)
+    private var _REF_MUSIC_IMAGES = STORAGE_BASE.child("musicArt")
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
-    }
-    
-    var REF_USERS: DatabaseReference {
-        return _REF_USERS
     }
     
     var REF_EVENTS: DatabaseReference {
         return _REF_EVENTS
     }
     
-    var REF_PROFILE_IMAGES: StorageReference {
-        return _REF_PROFILE_IMAGES
-    }
-    
-    var REF_MUSIC_EVENT_IMAGES: StorageReference {
-        return _REF_MUSIC_EVENT_IMAGES
+    var REF_MUSIC_IMAGES: StorageReference {
+        return _REF_MUSIC_IMAGES
     }
 }
 

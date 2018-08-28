@@ -519,8 +519,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIx-im-krQ" customClass="IHWaveFormView" customModule="musicVOID" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="30" width="359" height="160"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cwm-ge-fMZ" customClass="FDWaveformView" customModule="FDWaveformView">
+                                        <rect key="frame" x="0.0" y="567" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -546,6 +546,16 @@
                                         <state key="normal" image="noun_1229052_cc-copy"/>
                                         <connections>
                                             <action selector="browseAction:" destination="cPx-gU-I9k" eventType="touchUpInside" id="b15-Fd-c5R"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xhq-jl-qkG">
+                                        <rect key="frame" x="8" y="38" width="30" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="✕">
+                                            <color key="titleColor" red="1" green="0.050980392159999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetPlaylistAction:" destination="cPx-gU-I9k" eventType="touchUpInside" id="TCC-J2-xUf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -674,6 +684,7 @@
                     <connections>
                         <outlet property="artistLabel" destination="uVy-n3-tJN" id="8OX-RC-yg9"/>
                         <outlet property="coverImageView" destination="j4C-mc-Tzg" id="Pcm-Rm-Qve"/>
+                        <outlet property="fdWaveFormView" destination="cwm-ge-fMZ" id="adp-hA-hop"/>
                         <outlet property="logoImageView" destination="e81-lD-OnE" id="d2j-aK-QPp"/>
                         <outlet property="minimizeButton" destination="vdT-du-ZHY" id="UlC-PW-dQd"/>
                         <outlet property="musicProgress" destination="eVU-FR-Hfl" id="CNl-Bf-XLc"/>
@@ -683,7 +694,6 @@
                         <outlet property="tableBackView" destination="0N8-Jd-Nin" id="ShW-lF-kuO"/>
                         <outlet property="tableView" destination="2e6-Zz-8zT" id="KEl-07-mHS"/>
                         <outlet property="titleLabel" destination="UbX-CK-Kih" id="vRE-cT-ihB"/>
-                        <outlet property="waveFormView" destination="SIx-im-krQ" id="ccI-9K-R5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBg-Kj-8NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
