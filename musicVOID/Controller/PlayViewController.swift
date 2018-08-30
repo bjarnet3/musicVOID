@@ -71,8 +71,6 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     var songsPlayed = 0
     var minimumSongsBetweenSongs = 2
     
-    
-    
     // MARK: - Player functions
     func nowPlaying() {
         if musicPlayer.nowPlayingItem?.title != titleLabel.text {
@@ -80,6 +78,8 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
                 self.coverImageView.image = item.artwork?.image(at: CGSize(width: 500, height: 500))
                 self.artistLabel.text = item.artist
                 self.titleLabel.text = item.title
+                
+                viewStartupAnimation()
             }
         }
     }
@@ -156,6 +156,8 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
                     self.removeDatabaseValues(at: .voting, persistentID)
                 }
             }
+            
+            
         })
     }
     // MARK: - Database and Image tools
@@ -502,7 +504,6 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func basicSetup() {
-        
         self.playlistProgress.backgroundColor = UIColor.clear
         self.playlistProgress.layer.shadowColor = PINK_DARK_SOLID.cgColor
         self.playlistProgress.layer.shadowOffset = CGSize(width: 1.3, height: 5.8)
@@ -594,19 +595,20 @@ class PlayViewController: UIViewController, MPMediaPickerControllerDelegate {
             self.midiMizeRemote()
         }
     }
+    var viewStartupAnimationLoaded = false
 }
 
 extension PlayViewController {
     // MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        printFunc()
         
         // Set tableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0)
         
-        scrollView.delegate = self
         scrollView.delegate = self
         
         // Set tableBackView
@@ -626,36 +628,61 @@ extension PlayViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        printFunc()
         
         let tab = self.tabBarController?.tabBar as! FrostyTabBar
         tab.setEffect(blurEffect: .light)
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        printFunc()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        printFunc()
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setProgress(progress: 0.0, animated: true, alpha: 0.0)
+        printFunc()
+        viewStartupAnimation()
     }
+    
+    // Animation on Startup
+    func viewStartupAnimation(_ force: Bool = false) {
+        if !viewStartupAnimationLoaded || force {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: -90), animated: false)
+            self.setProgress(progress: 0.0, animated: true, alpha: 0.0)
+            UIView.animate(withDuration: 0.7, delay: 1.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.35, options: .curveEaseOut, animations: {
+                self.scrollView.contentOffset.y = 0
+            })
+        }
+        viewStartupAnimationLoaded = true
+    }
+    
 }
 
+// Unable to perform animation with scrollView at viewDidLoad() ,, put scrollView animation code in viewDidAppear()
 extension PlayViewController : UIScrollViewDelegate {
     // Search for: scrollViewDidScroll UIVisualEffect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if scrollView == self.scrollView {
             let contentOffset = scrollView.contentOffset.y < 0 ? -scrollView.contentOffset.y : scrollView.contentOffset.y
-            let scaleMIN:CGFloat = 1.0
+            let scaleMIN: CGFloat = 1.0
             let scaleMAX = (contentOffset * 0.00100) + (scaleMIN - 0.00100)
             self.coverImageView.transform = CGAffineTransform(scaleX: scaleMAX, y: scaleMAX)
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("scrollViewWillBeginDragging")
         self.scrollActive = true
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print("scrollViewWillEndDragging: \(velocity) with -80 in offset ")
+        printFunc("\(velocity) with -80 in offset")
         
         if scrollView == self.scrollView {
             if scrollView.contentOffset.y <= -80 {
@@ -672,23 +699,21 @@ extension PlayViewController : UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("scrollViewDidEndDragging")
-        print("decelerate: \(decelerate)")
+        printFunc("decelerate: \(decelerate)")
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        print("scrollViewWillBeginDecelerating")
+        printFunc()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // self.scrollContentOffset = 0.0
         if scrollView.contentOffset.y <= -80 {
-            print("scrollViewDidEndDecelerating and -80 y. offset")
+            printFunc("-80 y. offset")
         }
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndScrollingAnimation")
+        printFunc()
     }
     
 }

@@ -43,29 +43,6 @@ class VoteViewController: UIViewController {
     var canVote: Bool = false
     var voteCasted = 0
     
-    // var timer = Timer()
-    
-    // var artistString = "Welcome to Hey-DJ!   "
-    // var titleString = "   Vote on favorite song   "
-    
-    /*
-     func setTimer() {
-     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(titleBoard), userInfo: nil, repeats: true)
-     }
-     
-     @objc func titleBoard() {
-     let lastFirst = self.artistString.characters.first
-     self.artistString.characters.removeFirst()
-     self.artistString.characters.append(lastFirst!)
-     self.nowPlayingArtistLabel.text = self.artistString
-     
-     let firstLast = self.titleString.characters.first
-     self.titleString.characters.removeFirst()
-     self.titleString.characters.append(firstLast!)
-     self.nowPlayingTitleLabel.text = self.titleString
-     }
-     */
-    
     func voteViewImage(num: Int) -> UIImageView {
         switch num {
         case 0:
@@ -81,6 +58,9 @@ class VoteViewController: UIViewController {
     // MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        printFunc()
+        printCount()
         
         self.vote1Image.layer.cornerRadius = vote1Image.layer.frame.height / 2
         self.vote1Image.layer.borderWidth = 1.0
@@ -106,9 +86,19 @@ class VoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        printFunc()
+        printCount()
+        
         if let tab = self.tabBarController?.tabBar as? FrostyTabBar {
             tab.setEffect(blurEffect: .light)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        printFunc()
+        printCount()
     }
     
     // MARK: - Vote View Functions

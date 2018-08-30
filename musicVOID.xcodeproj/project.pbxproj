@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C17847C213778A400A3FEF4 /* PrintDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17847B213778A400A3FEF4 /* PrintDebug.swift */; };
 		5C1D5B97209445600025172A /* bold_dot_digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C1D5B942094455F0025172A /* bold_dot_digital-7.ttf */; };
 		5C1D5B98209445600025172A /* dotty fold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C1D5B952094455F0025172A /* dotty fold.ttf */; };
 		5C1D5B99209445600025172A /* enhanced_dot_digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C1D5B96209445600025172A /* enhanced_dot_digital-7.ttf */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5C17847B213778A400A3FEF4 /* PrintDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDebug.swift; sourceTree = "<group>"; };
 		5C1D5B942094455F0025172A /* bold_dot_digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bold_dot_digital-7.ttf"; sourceTree = "<group>"; };
 		5C1D5B952094455F0025172A /* dotty fold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dotty fold.ttf"; sourceTree = "<group>"; };
 		5C1D5B96209445600025172A /* enhanced_dot_digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "enhanced_dot_digital-7.ttf"; sourceTree = "<group>"; };
@@ -118,8 +120,8 @@
 		5C1D5B91209445110025172A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5C1D5B9A2094458E0025172A /* VoteViewController.swift */,
 				5C77F072209481BC00DD39A7 /* PlayViewController.swift */,
+				5C1D5B9A2094458E0025172A /* VoteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -130,6 +132,7 @@
 				5C77F0702094502300DD39A7 /* Music.swift */,
 				5C77F07720948CF600DD39A7 /* Constants.swift */,
 				5C1D5B9E209445DA0025172A /* Functions.swift */,
+				5C17847B213778A400A3FEF4 /* PrintDebug.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				5C1D5B9D209445B70025172A /* DataService.swift in Sources */,
 				5C486E3F2121E30000F63214 /* RoundCornerView.swift in Sources */,
 				5C77F07820948CF700DD39A7 /* Constants.swift in Sources */,
+				5C17847C213778A400A3FEF4 /* PrintDebug.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +520,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = musicVOID/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.digitalmood.musicVOID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -536,7 +543,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = musicVOID/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.digitalmood.musicVOID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

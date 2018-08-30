@@ -10,6 +10,7 @@ import UIKit
 
 class RoundCornerView: UIView {
     
+    @IBInspectable
     var image: UIImage? {
         didSet {
             setupView(image: image)
