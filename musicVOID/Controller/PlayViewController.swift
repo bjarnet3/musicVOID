@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import MediaPlayer
 import MBCircularProgressBar
-import SoundWaveForm
 import Foundation
 import AVFoundation
 import FDWaveformView

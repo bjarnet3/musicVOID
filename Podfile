@@ -11,6 +11,5 @@ target 'musicVOID' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'MBCircularProgressBar'
-  pod 'FDWaveformView'
 
 end
