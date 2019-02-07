@@ -5,4 +5,4 @@ Fill the emptiness with music
 
 Start play with you local music... Try it!
 
-![Music Player](https://github.com/bjarnet3/musicVOID/blob/master/musicVOID/Library/Assets.xcassets/music-player.imageset/music-player.png)
+![Music Player](https://github.com/bjarnet3/musicVOID/blob/master/musicVOID/Library/musicVOID-Preview.png)
