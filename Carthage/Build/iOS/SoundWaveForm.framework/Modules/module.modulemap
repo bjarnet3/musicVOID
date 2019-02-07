@@ -1,4 +1,0 @@
-framework module SoundWaveForm {
-    header "SoundWaveForm-Swift.h"
-    requires objc
-}
